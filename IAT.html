@@ -1,0 +1,120 @@
+<script type="text/javascript">
+
+shuffle = function(o){ //v1.0
+for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+return o;
+};
+
+document.onkeyup = KeyCheck;
+
+var input    = new Array();
+var correct  = new Array();
+var neworder = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]);
+
+var t = 0;var c = 0;var d;var running = 0;
+
+input[0]="Horrible";       correct[0]=76;
+input[1]="Nasty";          correct[1]=76;
+input[2]="Awful";          correct[2]=76;
+input[3]="Terrible";       correct[3]=76;
+input[4]="Agony";          correct[4]=76;
+input[5]="Hurt";           correct[5]=76;
+input[6]="Evil";           correct[6]=76;
+input[7]="Failure";        correct[7]=76;
+
+input[8]="Happy";          correct[8]=65;
+input[9]="Beautiful";      correct[9]=65;
+input[10]="Laughter";      correct[10]=65;
+input[11]="Pleasure";      correct[11]=65;
+input[12]="Joy";           correct[12]=65;
+input[13]="Wonderful";     correct[13]=65;
+input[14]="Smile";         correct[14]=65;
+input[15]="Glorious";      correct[15]=65;
+
+input[16]="Horrible";      correct[16]=76;
+input[17]="Nasty";         correct[17]=76;
+input[18]="Awful";         correct[18]=76;
+input[19]="Terrible";      correct[19]=76;
+input[20]="Agony";         correct[20]=76;
+input[21]="Hurt";          correct[21]=76;
+input[22]="Evil";          correct[22]=76;
+input[23]="Failure";       correct[23]=76;
+
+input[24]="Happy";         correct[24]=65;
+input[25]="Beautiful";     correct[25]=65;
+input[26]="Laughter";      correct[26]=65;
+input[27]="Pleasure";      correct[27]=65;
+input[28]="Joy";           correct[28]=65;
+input[29]="Wonderful";     correct[29]=65;
+input[30]="Smile";         correct[30]=65;
+input[31]="Glorious";      correct[31]=65;
+
+function start_it() {
+  if (c<32) {
+    var day = new Date(); trialstart = day.getTime();
+    document.getElementById("Message").innerHTML = "<br>" + input[neworder[c]];
+  }
+  else {
+    clearInterval(t)
+    document.getElementById("Message").innerHTML = "<br>You may now proceed to the next section";
+    document.getElementById("QR~QID6").value = document.getElementById("QR~QID6").value + "END";
+  }
+}
+
+function KeyCheck(e) {
+  var KeyID = (window.event) ? event.keyCode : e.keyCode;
+  if (c<32) {
+    d=neworder[c]; if (d<=9) {d="0"+d;}
+    if(KeyID == 65)  {
+      var day = new Date(); trialend = day.getTime();
+      rt = trialend - trialstart;
+      if(correct[neworder[c]] == 65){
+       document.getElementById("QR~QID6").value = document.getElementById("QR~QID6").value + d + "C" + rt + ",";
+        document.getElementById("Message").innerHTML = "<br>+";
+        c=c+1;
+        t = setTimeout('start_it();',500);
+      }
+      else{
+       document.getElementById("QR~QID6").value = document.getElementById("QR~QID6").value + d + "X" + rt + ",";
+        document.getElementById("Message").innerHTML = "<b style='color:red;font-size:80px'>X</b>";
+        c=c+1;
+        t = setTimeout('document.getElementById("Message").innerHTML = "<br>+";',500);
+        t = setTimeout('start_it();',700);
+      }
+
+    }
+
+    if(KeyID == 76)  {
+      var day = new Date(); trialend = day.getTime();
+      rt = trialend - trialstart;
+      if(correct[neworder[c]] == 76){
+       document.getElementById("QR~QID6").value = document.getElementById("QR~QID6").value + d + "C" + rt + ",";
+        document.getElementById("Message").innerHTML = "<br>+";
+        c=c+1;
+        t = setTimeout('start_it();',500);
+      }
+      else{
+       document.getElementById("QR~QID6").value = document.getElementById("QR~QID6").value + d + "X" + rt + ",";
+        document.getElementById("Message").innerHTML = "<b style='color:red;font-size:80px'>X</b>";
+        c=c+1;
+        t = setTimeout('document.getElementById("Message").innerHTML = "<br>+";',500);
+        t = setTimeout('start_it();',700);
+      }
+
+    }
+
+    if(KeyID == 32)  {
+      if (running == 0) {
+        document.getElementById('instructions').style.display = "none";
+        running = 1;
+              start_it();
+      }
+    }
+  }
+}
+
+</script>
+
+<center>
+<b style='font-size:30px'>Good Word &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Bad Word</b><h2 id="Message" style='font-size:30px'>+</h2><br><p id="instructions">Please place your left and right fingers on the <b>A</b> and <b>L</b> keys respectively. At the top of the screen, you will see 2 categories, one on the right and one on the left. Words will start appearing in the middle of the screen, one by one.When the word belongs to the category on the left, press the <b>A</b> key on your keyboard as fast as you can. When the word belongs to the category on the right, press the <b>L</b> key on your keyboard as fast as you can. If you make an error, a red <b style='color:red'>X</b> will appear.  Please try to make as few errors as possible.<br><br>When you are ready, please press the [Space] bar to begin.<br><br>
+Part 1 of 7</p></center>
